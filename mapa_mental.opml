@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Guía de programación de gráficos y realidad mixta</title>
+  </head>
+  <body>
+    <outline text="Guía de programación de gráficos y realidad mixta">
+      <outline text="Fundamentos de matemáticas y física">
+        <outline text="Algebra Lineal">
+          <outline text="Vectores y escalares">
+            <outline text="Comprensión">
+              <outline text="posición" />
+              <outline text="dirección" />
+              <outline text="magnitud" />
+            </outline>
+          </outline>
+          <outline text="Transformaciones matriciales">
+            <outline text="traslación" />
+            <outline text="rotación" />
+            <outline text="escalado" />
+          </outline>
+          <outline text="Productos de punto y cruz">
+            <outline text="ángulos de iluminación" />
+            <outline text="reflejos" />
+            <outline text="normales" />
+          </outline>
+        </outline>
+        <outline text="Trigonometria">
+          <outline text="Senos, cosenos y tangentes">
+            <outline text="movimientos periódicos" />
+            <outline text="rotaciones" />
+            <outline text="calcular ángulos entre objetos" />
+          </outline>
+          <outline text="Círculo unitario">
+            <outline text="Visualización de rotaciones" />
+            <outline text="coordenadas polares" />
+          </outline>
+        </outline>
+        <outline text="Física en Juegos">
+          <outline text="Cinética">
+            <outline text="velocidad" />
+            <outline text="aceleración" />
+            <outline text="desplazamiento" />
+          </outline>
+          <outline text="Detección de colisiones">
+            <outline text="intro a las AABB (cajas delimitadoras alineadas con los ejes)" />
+            <outline text="comprobaciones de colisión entre esferas" />
+          </outline>
+          <outline text="Dinámica de cuerpos rígidos">
+            <outline text="gravedad" />
+            <outline text="fricción" />
+            <outline text="rebote" />
+          </outline>
+        </outline>
+      </outline>
+      <outline text="Lenguajes de programación">
+        <outline text="C++">
+          <outline text="Gestión de la memoria">
+            <outline text="punteros">
+              <outline text="gráficos de alto rendimiento." />
+            </outline>
+            <outline text="referencias" />
+          </outline>
+        </outline>
+        <outline text="C#">
+          <outline text="Seguridad de la memoria">
+            <outline text="recolección automática de basura" />
+          </outline>
+        </outline>
+      </outline>
+    </outline>
+  </body>
+</opml>
