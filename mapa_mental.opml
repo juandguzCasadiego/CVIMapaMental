@@ -23,6 +23,23 @@
             <outline text="ángulos de iluminación" />
             <outline text="reflejos" />
             <outline text="normales" />
+            <outline text="ejes ortonormales de cámara (right, up, forward)" />
+          </outline>
+          <outline text="Cámara y coordenadas homogéneas">
+            <outline text="coordenadas homogéneas (x, y, z, w)">
+              <outline text="w = 1 → punto (afectado por traslación)" />
+              <outline text="w = 0 → vector/dirección (no afectado por traslación)" />
+              <outline text="división de perspectiva (x/w, y/w, z/w)" />
+            </outline>
+            <outline text="matriz de vista (View Matrix)">
+              <outline text="entradas: eye, target, up" />
+              <outline text="forward = normalizar(target - eye)" />
+              <outline text="right = normalizar(forward × up)" />
+              <outline text="newUp = right × forward" />
+              <outline text="composición en matriz 4x4 (rotación + traslación)" />
+            </outline>
+            <outline text="caso degenerado: forward y up paralelos" />
+            <outline text="uso en el pipeline: Modelo → Mundo → Vista → Proyección → Pantalla" />
           </outline>
         </outline>
         <outline text="Trigonometria">
