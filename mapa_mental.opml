@@ -70,6 +70,23 @@
           </outline>
         </outline>
       </outline>
+      <outline text="Imágenes Ráster">
+        <outline text="Cuantización y banding">
+          <outline text="clipping (valores por encima del máximo se recortan)" />
+          <outline text="quantization artifacts / banding al reducir bits" />
+        </outline>
+        <outline text="Dithering (Floyd-Steinberg, 1976)">
+          <outline text="problema: banding al reducir profundidad de color" />
+          <outline text="idea: no descartar el error de redondeo, difundirlo">
+            <outline text="error = valor original − valor redondeado" />
+            <outline text="pesos de difusión: 7/16, 3/16, 5/16, 1/16" />
+            <outline text="pesos elegidos para que gris 50% dé patrón de damero" />
+          </outline>
+          <outline text="relación con halftones de impresión" />
+          <outline text="dithering ordenado (matriz de Bayer)" />
+          <outline text="usos actuales: PNG→GIF, impresión, pixel art retro" />
+        </outline>
+      </outline>
       <outline text="Lenguajes de programación">
         <outline text="C++">
           <outline text="Gestión de la memoria">
