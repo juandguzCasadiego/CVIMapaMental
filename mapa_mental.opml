@@ -87,6 +87,31 @@
           <outline text="usos actuales: PNG→GIF, impresión, pixel art retro" />
         </outline>
       </outline>
+      <outline text="Ray Tracing">
+        <outline text="Fundamentos de ray casting">
+          <outline text="rayo primario: p(t) = e + t·d" />
+          <outline text="tres pasos: generar rayo, hallar intersección, sombrear" />
+        </outline>
+        <outline text="Intersección Rayo-AABB (método de las láminas)">
+          <outline text="problema: probar cada rayo contra cada objeto es O(n)" />
+          <outline text="estructuras de aceleración (BVH) agrupan objetos en cajas" />
+          <outline text="idea: una caja = intersección de 3 láminas (slabs)">
+            <outline text="lámina = franja infinita entre 2 planos paralelos" />
+            <outline text="una lámina por eje: X, Y, Z" />
+          </outline>
+          <outline text="algoritmo por eje">
+            <outline text="t1 = (min - e) / d   (entrada a la lámina)" />
+            <outline text="t2 = (max - e) / d   (salida de la lámina)" />
+            <outline text="si t1 > t2, se intercambian" />
+          </outline>
+          <outline text="combinar los 3 intervalos">
+            <outline text="t_entrada = max(t1_x, t1_y, t1_z)" />
+            <outline text="t_salida = min(t2_x, t2_y, t2_z)" />
+            <outline text="hay impacto si t_entrada ≤ t_salida  y  t_salida ≥ 0" />
+          </outline>
+          <outline text="por qué importa: acelera BVH, base del RT Core en GPUs RTX" />
+        </outline>
+      </outline>
       <outline text="Lenguajes de programación">
         <outline text="C++">
           <outline text="Gestión de la memoria">
