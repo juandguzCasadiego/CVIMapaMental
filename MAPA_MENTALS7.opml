@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Guía de programación de gráficos y realidad mixta</title>
+  </head>
+  <body>
+    <outline text="Guía de programación de gráficos y realidad mixta">
+      <outline text="Fundamentos de matemáticas y física">
+        <outline text="Algebra Lineal">
+          <outline text="Vectores y escalares">
+            <outline text="Comprensión">
+              <outline text="posición" />
+              <outline text="dirección" />
+              <outline text="magnitud" />
+            </outline>
+          </outline>
+          <outline text="Transformaciones matriciales">
+            <outline text="traslación" />
+            <outline text="rotación" />
+            <outline text="escalado" />
+          </outline>
+          <outline text="Productos de punto y cruz">
+            <outline text="ángulos de iluminación" />
+            <outline text="reflejos" />
+            <outline text="normales" />
+            <outline text="ejes ortonormales de cámara (right, up, forward)" />
+          </outline>
+          <outline text="Cámara y coordenadas homogéneas">
+            <outline text="coordenadas homogéneas (x, y, z, w)">
+              <outline text="w = 1 → punto (afectado por traslación)" />
+              <outline text="w = 0 → vector/dirección (no afectado por traslación)" />
+              <outline text="división de perspectiva (x/w, y/w, z/w)" />
+            </outline>
+            <outline text="matriz de vista (View Matrix)">
+              <outline text="entradas: eye, target, up" />
+              <outline text="forward = normalizar(target - eye)" />
+              <outline text="right = normalizar(forward × up)" />
+              <outline text="newUp = right × forward" />
+              <outline text="composición en matriz 4x4 (rotación + traslación)" />
+            </outline>
+            <outline text="caso degenerado: forward y up paralelos" />
+            <outline text="uso en el pipeline: Modelo → Mundo → Vista → Proyección → Pantalla" />
+          </outline>
+        </outline>
+        <outline text="Trigonometria">
+          <outline text="Senos, cosenos y tangentes">
+            <outline text="movimientos periódicos" />
+            <outline text="rotaciones" />
+            <outline text="calcular ángulos entre objetos" />
+          </outline>
+          <outline text="Círculo unitario">
+            <outline text="Visualización de rotaciones" />
+            <outline text="coordenadas polares" />
+          </outline>
+        </outline>
+        <outline text="Física en Juegos">
+          <outline text="Cinética">
+            <outline text="velocidad" />
+            <outline text="aceleración" />
+            <outline text="desplazamiento" />
+          </outline>
+          <outline text="Detección de colisiones">
+            <outline text="intro a las AABB (cajas delimitadoras alineadas con los ejes)" />
+            <outline text="comprobaciones de colisión entre esferas" />
+          </outline>
+          <outline text="Dinámica de cuerpos rígidos">
+            <outline text="gravedad" />
+            <outline text="fricción" />
+            <outline text="rebote" />
+          </outline>
+        </outline>
+      </outline>
+      <outline text="Imágenes Ráster">
+        <outline text="Cuantización y banding">
+          <outline text="clipping (valores por encima del máximo se recortan)" />
+          <outline text="quantization artifacts / banding al reducir bits" />
+        </outline>
+        <outline text="Dithering (Floyd-Steinberg, 1976)">
+          <outline text="problema: banding al reducir profundidad de color" />
+          <outline text="idea: no descartar el error de redondeo, difundirlo">
+            <outline text="error = valor original − valor redondeado" />
+            <outline text="pesos de difusión: 7/16, 3/16, 5/16, 1/16" />
+            <outline text="pesos elegidos para que gris 50% dé patrón de damero" />
+          </outline>
+          <outline text="relación con halftones de impresión" />
+          <outline text="dithering ordenado (matriz de Bayer)" />
+          <outline text="usos actuales: PNG→GIF, impresión, pixel art retro" />
+        </outline>
+      </outline>
+      <outline text="Ray Tracing">
+        <outline text="Fundamentos de ray casting">
+          <outline text="rayo primario: p(t) = e + t·d" />
+          <outline text="tres pasos: generar rayo, hallar intersección, sombrear" />
+        </outline>
+        <outline text="Intersección Rayo-AABB (método de las láminas)">
+          <outline text="problema: probar cada rayo contra cada objeto es O(n)" />
+          <outline text="estructuras de aceleración (BVH) agrupan objetos en cajas" />
+          <outline text="idea: una caja = intersección de 3 láminas (slabs)">
+            <outline text="lámina = franja infinita entre 2 planos paralelos" />
+            <outline text="una lámina por eje: X, Y, Z" />
+          </outline>
+          <outline text="algoritmo por eje">
+            <outline text="t1 = (min - e) / d   (entrada a la lámina)" />
+            <outline text="t2 = (max - e) / d   (salida de la lámina)" />
+            <outline text="si t1 > t2, se intercambian" />
+          </outline>
+          <outline text="combinar los 3 intervalos">
+            <outline text="t_entrada = max(t1_x, t1_y, t1_z)" />
+            <outline text="t_salida = min(t2_x, t2_y, t2_z)" />
+            <outline text="hay impacto si t_entrada ≤ t_salida  y  t_salida ≥ 0" />
+          </outline>
+          <outline text="por qué importa: acelera BVH, base del RT Core en GPUs RTX" />
+        </outline>
+      </outline>
+      <outline text="Viewing">
+        <outline text="Pipeline de visualización (5 espacios)">
+          <outline text="Objeto → Mundo → Cámara → Volumen canónico → Pantalla" />
+          <outline text="ortográfica y perspectiva terminan en el mismo cubo [-1,1]³" />
+        </outline>
+        <outline text="Ortográfica vs. Perspectiva">
+          <outline text="ortográfica: rayos paralelos, preserva tamaños" />
+          <outline text="perspectiva: rayos convergen en el ojo, objetos lejanos se ven más chicos" />
+          <outline text="volumen de vista: caja [l,r]x[b,t]x[f,n] vs. frustum piramidal" />
+        </outline>
+        <outline text="Transformaciones Proyectivas 2D (Homografías)">
+          <outline text="problema: afín preserva paralelismo, no sirve para deformar a cualquier cuadrilátero" />
+          <outline text="idea: dejar que w varíe punto a punto">
+            <outline text="[x, y, w] representa el punto (x/w, y/w)" />
+            <outline text="w fijo en 1 → afín; w variable → proyectiva" />
+          </outline>
+          <outline text="ejemplo del libro: matriz M lleva el cuadrado unitario a un cuadrilátero">
+            <outline text="(1,0) → homogéneo [1,0,1/3] → (3,0)" />
+          </outline>
+          <outline text="cálculo inverso: DLT (Direct Linear Transform)">
+            <outline text="4 correspondencias de puntos → sistema de 8 ecuaciones lineales" />
+            <outline text="se resuelve con eliminación gaussiana" />
+          </outline>
+          <outline text="preserva líneas rectas, no el paralelismo" />
+          <outline text="demo: mapeo inverso por píxel (CPU/canvas) y por fragment shader GLSL (GPU/OpenGL)" />
+          <outline text="usos: apps de escaneo de documentos, texturas en videojuegos, planar tracking en VFX" />
+        </outline>
+      </outline>
+      <outline text="Monte Carlo Path Tracing">
+        <outline text="De Ray Tracing a Path Tracing">
+          <outline text="rayo: P(t) = O + t·D" />
+          <outline text="en la intersección: punto, normal, material" />
+          <outline text="en vez de parar, generar un nuevo rayo desde ahí">
+            <outline text="camino (path): Cámara → objeto → objeto → ... → fuente de luz" />
+          </outline>
+        </outline>
+        <outline text="El problema: explosión combinatoria">
+          <outline text="cada rebote multiplica las direcciones posibles: 1 → N → N² → N³ → ..." />
+          <outline text="Full HD = 1920×1080 = 2,073,600 píxeles" />
+          <outline text="calcular todas las trayectorias por cada píxel es inviable" />
+        </outline>
+        <outline text="La idea de Monte Carlo">
+          <outline text="usar muestras aleatorias para aproximar un resultado (como encuestar una muestra en vez de toda la población)" />
+          <outline text="L ≈ (1/N) Σ Lᵢ  (promedio de N caminos muestreados)" />
+          <outline text="no calcular todas las posibilidades: calcular una muestra y promediar" />
+        </outline>
+        <outline text="¿Por qué aleatoriedad?">
+          <outline text="explora direcciones sin tener que evaluarlas todas" />
+          <outline text="no es solo para meter ruido: es parte del método numérico" />
+        </outline>
+        <outline text="El loop de un rayo (mecanismo básico)">
+          <outline text="generar rayo → buscar intersección → evaluar material → scatter → nuevo rayo → repetir" />
+        </outline>
+        <outline text="Materiales (proyecto RayTracerBench)">
+          <outline text="Lambertian (difuso)">
+            <outline text="scatterDirection = normal + randomUnitVector()" />
+            <outline text="si el resultado es ~0, usar la normal como respaldo" />
+          </outline>
+          <outline text="Metal (reflectivo)">
+            <outline text="R = D − 2(D·N)N" />
+            <outline text="fuzz: variación aleatoria para simular metal rugoso (no espejo perfecto)" />
+          </outline>
+          <outline text="Dielectric (vidrio/agua)">
+            <outline text="ley de Snell para la refracción" />
+            <outline text="reflexión interna total en ciertos ángulos" />
+            <outline text="aproximación de Schlick: proporción reflexión vs. refracción" />
+          </outline>
+        </outline>
+        <outline text="Algoritmo completo">
+          <outline text="rayColor(): sigue los rebotes" />
+          <outline text="scatter(): decide el comportamiento según el material" />
+          <outline text="se detiene en una profundidad máxima de rebotes" />
+        </outline>
+        <outline text="Muestras y ruido">
+          <outline text="más muestras → menos ruido → más cálculo" />
+          <outline text="el ruido viene de promediar pocas muestras aleatorias (no es un bug)" />
+          <outline text="1, 10, 100, 1000 muestras: la imagen se limpia progresivamente" />
+        </outline>
+        <outline text="¿Por qué se ve realista?">
+          <outline text="los efectos (iluminación indirecta, reflejos, refracciones) emergen solos de seguir los caminos, sin reglas especiales por caso" />
+        </outline>
+        <outline text="Costo computacional y GPU">
+          <outline text="2,000,000 píxeles × 100 muestras ≈ 200,000,000 muestras primarias" />
+          <outline text="Path Tracing es masivamente paralelo (píxeles y rayos independientes)" />
+          <outline text="RayTraceCore.h: núcleo de lógica compartido entre CPU y GPU" />
+        </outline>
+        <outline text="Números aleatorios">
+          <outline text="seed se pasa y se actualiza a través de scatter()" />
+          <outline text="la aleatoriedad está integrada al algoritmo, no es un añadido al final" />
+        </outline>
+        <outline text="El gran intercambio (trade-off)">
+          <outline text="Calidad↑ ⟹ Muestras↑ ⟹ Costo computacional↑" />
+        </outline>
+        <outline text="Conexión con el código">
+          <outline text="TransformGPU (posición/orientación), ShapeGPU (geometría), MaterialGPU (comportamiento del rayo)" />
+          <outline text="hitEntity() elige la función de intersección (hitSphere, hitPyramid, ...)" />
+        </outline>
+      </outline>
+      <outline text="Graphics Pipeline">
+        <outline text="Las 5 etapas clásicas">
+          <outline text="Vertex Processing → Clipping → Rasterization → Fragment Processing → Blending &amp; Output" />
+          <outline text="matrices: Model, View, Projection, Viewport" />
+          <outline text="rasterización con coordenadas baricéntricas" />
+          <outline text="z-buffer resuelve visibilidad" />
+          <outline text="culling: backface (winding order) y view-volume" />
+        </outline>
+        <outline text="Simple Antialiasing">
+          <outline text="problema: decisión todo-o-nada en el centro del pixel → jaggies" />
+          <outline text="idea: box filter, color promedio según cobertura de la primitiva" />
+          <outline text="supersampling: ejemplo del libro, 256×256 → 1024×1024 (línea de 1.2px → 4.8px)" />
+          <outline text="optimización real: muestrear visibilidad a mayor resolución que el shading (MSAA)" />
+          <outline text="FAQ: no siempre es mejor (screen fonts sin antialiasing)" />
+        </outline>
+        <outline text="Mesh Shaders (el &quot;boom&quot; actual)">
+          <outline text="reemplazan Vertex Processing + Clipping (etapa fija) por 2 etapas programables" />
+          <outline text="meshlets: ~64 vértices + ~124 triángulos por grupo" />
+          <outline text="Task Shader / Amplification Shader">
+            <outline text="decide cuántos meshlets generar; culling a nivel de grupo completo" />
+            <outline text="gl_TaskCountNV reporta cuántos meshlets sobrevivieron" />
+          </outline>
+          <outline text="Mesh Shader">
+            <outline text="genera vértices/triángulos solo de los meshlets sobrevivientes" />
+            <outline text="gl_WorkGroupID.x identifica qué meshlet le toca" />
+          </outline>
+          <outline text="línea de tiempo: 2018 Nvidia Turing → 2019 DirectX 12 → 2022 Vulkan VK_EXT_mesh_shader" />
+          <outline text="usos: Nanite (Unreal Engine 5), juegos AAA, hardware RTX/RDNA2+/Arc/Apple" />
+          <outline text="proyecto: culling básico por posición X, basado en nvpro-samples/gl_vk_meshlet_cadscene">
+            <outline text="validado con glslangValidator (independiente del hardware)" />
+            <outline text="requiere GPU Nvidia RTX real para ejecutarse" />
+          </outline>
+        </outline>
+      </outline>
+      <outline text="Lenguajes de programación">
+        <outline text="C++">
+          <outline text="Gestión de la memoria">
+            <outline text="punteros">
+              <outline text="gráficos de alto rendimiento." />
+            </outline>
+            <outline text="referencias" />
+          </outline>
+        </outline>
+        <outline text="C#">
+          <outline text="Seguridad de la memoria">
+            <outline text="recolección automática de basura" />
+          </outline>
+        </outline>
+      </outline>
+    </outline>
+  </body>
+</opml>
