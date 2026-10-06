@@ -244,6 +244,80 @@
           </outline>
         </outline>
       </outline>
+      <outline text="Signal Processing">
+        <outline text="Motivación">
+          <outline text="imagen = señal" />
+          <outline text="continuo ↔ discreto" />
+          <outline text="enemigo: aliasing" />
+          <outline text="solución: filtrado" />
+        </outline>
+        <outline text="Conceptos básicos">
+          <outline text="señal continua f(x)" />
+          <outline text="muestreo">
+            <outline text="puntos discretos" />
+            <outline text="espaciado uniforme" />
+          </outline>
+          <outline text="reconstrucción">
+            <outline text="impulsos ponderados" />
+            <outline text="filtro de reconstrucción" />
+            <outline text="angosto → bordes duros" />
+            <outline text="amplio → muy suave" />
+          </outline>
+        </outline>
+        <outline text="Transformada de Fourier">
+          <outline text="suma de senos y cosenos" />
+          <outline text="espacio → frecuencia" />
+          <outline text="base para filtros" />
+        </outline>
+        <outline text="Convolución">
+          <outline text="señal ∗ kernel" />
+          <outline text="promedio ponderado" />
+          <outline text="deslizar y sumar" />
+          <outline text="= multiplicación en frecuencia" />
+          <outline text="usos">
+            <outline text="muestrear" />
+            <outline text="reconstruir" />
+            <outline text="blur" />
+            <outline text="antialiasing" />
+          </outline>
+        </outline>
+        <outline text="Aliasing">
+          <outline text="alta frecuencia → parece baja" />
+          <outline text="jaggies" />
+          <outline text="moiré" />
+          <outline text="flicker" />
+        </outline>
+        <outline text="Teorema de Nyquist">
+          <outline text="muestreo ≥ 2 × f máx" />
+          <outline text="frecuencia de Nyquist = f muestreo / 2" />
+          <outline text="sub-muestreo → aliasing irreversible" />
+          <outline text="prefiltrado" />
+        </outline>
+        <outline text="Filtros">
+          <outline text="Box: rápido, bloques" />
+          <outline text="Tent: interpolación lineal" />
+          <outline text="Gaussiano: suave, sin anillos" />
+          <outline text="Sinc: ideal, ringing" />
+          <outline text="nitidez vs. artefactos" />
+        </outline>
+        <outline text="Antialiasing">
+          <outline text="prefiltrado analítico" />
+          <outline text="supersampling" />
+          <outline text="muestreo adaptativo" />
+        </outline>
+        <outline text="Remuestreo">
+          <outline text="magnificación">
+            <outline text="reconstruir y re-muestrear" />
+            <outline text="bilineal / bicúbico" />
+          </outline>
+          <outline text="minificación">
+            <outline text="filtrar antes de reducir" />
+            <outline text="promedio de área" />
+            <outline text="gaussiano" />
+            <outline text="mipmaps" />
+          </outline>
+        </outline>
+      </outline>
       <outline text="Lenguajes de programación">
         <outline text="C++">
           <outline text="Gestión de la memoria">
